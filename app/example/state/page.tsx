@@ -1,7 +1,7 @@
 "use client";
 // user interactivity/states
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export default function Page() {
     const [ count, setCount ] = useState(1);
     // state hooks
@@ -12,6 +12,18 @@ export default function Page() {
     const handlePlus = () => {
         setCount(count + 1);
     }
+
+    // dependency check
+    useEffect(() => {
+        alert("Component mounted");
+    }, []);
+
+    useEffect(() => {
+        if(count == 0){
+            alert("Count is zero");
+        }
+    }, [count]); // everytime count changes, this function runs
+    // [count, var2, ...] multiple dependencies can be watched
     return (
         // render this when state changes
         <div>
